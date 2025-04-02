@@ -1,0 +1,22 @@
+from typing import List, TypeVar
+
+# Sử dụng Generics để có thể quản lý nhiều loại đối tượng khác nhau
+T = TypeVar('T', bound=Book)
+
+class Library:
+    def __init__(self):
+        self.books: List[T] = []
+
+    def add_book(self, book: T):
+        self.books.append(book)
+
+    def remove_book(self, title: str):
+        book_to_remove = next((book for book in self.books if book.title == title), None)
+        if book_to_remove:
+            self.books.remove(book_to_remove)
+            print(f"{title} has been removed from the library.")
+        else:
+            print(f"{title} not found in the library.")
+
+    def search_by_author(self, author: str) -> List[T]:
+        return [book for book in self.books if book.author.lower() ==
