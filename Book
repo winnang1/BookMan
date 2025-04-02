@@ -1,0 +1,24 @@
+class Book:
+    def __init__(self, title, author, year, available=True):
+        self.title = title
+        self.author = author
+        self.year = year
+        self.available = available
+
+    def __str__(self):
+        status = "Available" if self.available else "Checked out"
+        return f"Title: {self.title}, Author: {self.author}, Year: {self.year}, Status: {status}"
+
+    def check_out(self):
+        if self.available:
+            self.available = False
+            print(f"{self.title} has been checked out.")
+        else:
+            print(f"{self.title} is already checked out.")
+
+    def return_book(self):
+        if not self.available:
+            self.available = True
+            print(f"{self.title} has been returned.")
+        else:
+            print(f"{self.title} was not checked out.")
