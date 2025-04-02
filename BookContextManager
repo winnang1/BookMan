@@ -1,0 +1,21 @@
+class BookContextManager:
+    def __init__(self, book: Book):
+        self.book = book
+
+    def __enter__(self):
+        self.book.check_out()
+        return self.book
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.book.return_book()
+        if exc_type:
+            print(f"An error occurred: {exc_value}")
+        return True  # Ngăn không cho ngoại lệ được ném ra ngoài
+
+# Ví dụ sử dụng Context Manager
+book1 = Book("Python Programming", "John Doe", 2020)
+
+with BookContextManager(book1) as book:
+    print(f"Reading {book.title}")
+    # Giả lập lỗi khi đang mượn sách
+    raise ValueError("An unexpected error occurred while reading the book.")
