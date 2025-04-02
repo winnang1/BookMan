@@ -19,4 +19,14 @@ class Library:
             print(f"{title} not found in the library.")
 
     def search_by_author(self, author: str) -> List[T]:
-        return [book for book in self.books if book.author.lower() ==
+        return [book for book in self.books if book.author.lower() == author.lower()]
+
+    def search_by_title(self, title: str) -> List[T]:
+        return [book for book in self.books if title.lower() in book.title.lower()]
+
+    def display_books(self):
+        if not self.books:
+            print("No books available in the library.")
+        for book in self.books:
+            print(book)
+
